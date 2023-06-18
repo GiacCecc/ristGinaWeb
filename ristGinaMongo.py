@@ -1,5 +1,6 @@
 import pytz
 from dateutil import tz
+from zoneinfo import ZoneInfo
 
 
 def get_last_log(client, collection):
@@ -10,7 +11,7 @@ def get_last_log(client, collection):
 
     if last_document:
         logTime = pytz.utc.localize(last_document['logTime'])
-        logTime = logTime.astimezone(tz.tzlocal())
+        logTime = logTime.astimezone(ZoneInfo("Europe/Rome"))
         temp = last_document['temp']
     else:
         logTime = 'not found'
