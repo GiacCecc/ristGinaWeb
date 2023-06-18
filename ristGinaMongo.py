@@ -1,7 +1,6 @@
 import pytz
-from dateutil import tz
 from zoneinfo import ZoneInfo
-
+from datetime import timedelta
 
 def get_last_log(client, collection):
     db = client['CF01']
@@ -58,7 +57,7 @@ def get_data_timerange(client, collection, start_date, end_date):
 
     x, y = [], []
     for i in data:
-        x.append(i['logTime'])
+        x.append(i['logTime'] + timedelta(hours=2))
         y.append(i['temp'])
     
     return x, y
